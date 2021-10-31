@@ -1,0 +1,59 @@
+.audio-player {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .music-img {
+        text-align: center;
+        margin: 20px 0 10px;
+        span {
+            font-size: 165px;
+        }
+    }
+    .content {
+        mat-list::ng-deep {
+            .mat-list-item {
+                height: auto;
+                cursor: pointer;
+                .mat-list-item-content {
+                    padding: 6px 0;
+                }
+                .music-note {
+                    margin-right: 10px;
+                }
+                .name-blk {
+                    width: 95%;
+                    h3,
+                    h4 {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+    .footer {
+        .time-blk {
+            display: flex;
+            justify-content: space-between;
+        }
+        .time {
+            font-size: 18px;
+        }
+        mat-slider::ng-deep {
+            width: 86%;
+        }
+        button {
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 45px;
+            min-height: 45px;
+            border: 1px solid #212529;
+            color: #212529;
+            &:disabled {
+                opacity: 0.8;
+            }
+        }
+    }
+}

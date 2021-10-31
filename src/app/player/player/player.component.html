@@ -1,0 +1,48 @@
+<div class="audio-player">
+    <div class="top-blk">
+        <mat-toolbar>
+            <div class="container">
+                Audio Player
+            </div>
+        </mat-toolbar>
+        <div class="content">
+            <div class="container">
+                <div class="music-img">
+                    <span class="material-icons music-note">music_note</span>
+                </div>
+                <mat-list class="mb-5">
+                    <h2>Audio Playlist</h2>
+                    <mat-list-item class="p-0" *ngFor="let audio of files; let i=index;" (click)="openFile(audio, i)">
+                        <span class="material-icons music-note">music_note</span>
+                        <div class="name-blk">
+                            <h3>{{audio.name}}</h3>
+                            <h4>by {{audio.artist}}</h4>
+                        </div>
+                        <span class="material-icons" *ngIf="currentFile.index === i && !state?.error">volume_up</span>
+                        <span *ngIf="state?.error">Error</span>
+                        <mat-divider></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </div>
+    <div class="footer pb-2">
+        <mat-toolbar>
+            <mat-toolbar-row class="time-blk">
+                <span class="time">
+                    {{state?.readableCurrentTime}}
+                </span>
+                <mat-slider class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChangeEvent($event)" [disabled]="state?.error || currentFile.index == undefined"></mat-slider>
+                <span class="time">
+                    {{state?.readableDuration}}
+                </span>
+            </mat-toolbar-row>
+            <mat-toolbar-row class="justify-content-center">
+                <button mat-raised-button class="me-3" color="accent" (click)="previous()" [disabled]="isFirstPlaying()"><span class="material-icons">skip_previous</span></button>
+                <button mat-raised-button color="primary" (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing"><span class="material-icons">play_arrow</span></button>
+                <button mat-raised-button color="primary" (click)="pause()" [disabled]="state?.error" *ngIf="state?.playing"><span class="material-icons">pause</span></button>
+                <button mat-raised-button class="ms-3" color="accent" (click)="next()" [disabled]="isLastPlaying()"><span class="material-icons">skip_next</span></button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
+</div>
